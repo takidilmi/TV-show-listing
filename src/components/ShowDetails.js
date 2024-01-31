@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getShowDetails, getShowCast } from '../api/tvmazeApi';
 
 function ShowDetails() {
-  const { id, title } = useParams();
+  const { id } = useParams();
   const [show, setShow] = useState(null);
   const [cast, setCast] = useState([]);
 

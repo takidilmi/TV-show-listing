@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getShows } from '../api/tvmazeApi';
+import UpcomingEpisodes from './UpcomingEpisodes';
 
 function ShowList() {
   const [shows, setShows] = useState([]);
@@ -27,15 +28,19 @@ function ShowList() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center gap-2 w-screen h-screen">
+      <div className="flex flex-col justify-center items-center gap-2 w-screen">
+        <div>
+          <UpcomingEpisodes />
+        </div>
         {shows.map((show, index) => (
           <div
-            className="w-[300px] break-words"
+            className="w-[50vw] break-words"
             key={index}
           >
             <div className="flex">
               <img
-                src="https://via.placeholder.com/150"
+                src={show.image.medium}
+                alt={show.name}
                 loading="lazy"
                 width="150"
                 height="150"
