@@ -30,3 +30,12 @@ export const getShowCast = async (id) => {
     return null;
   }
 };
+export const getShowCrew = async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/shows/${id}/crew`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching data: ', error);
+    return null;
+  }
+};

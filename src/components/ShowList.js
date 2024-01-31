@@ -29,8 +29,10 @@ function ShowList() {
   return (
     <>
       <div className="flex flex-col justify-center items-center gap-2 w-screen">
-        <div><UpcomingEpisodes /></div>
-        <h1 className='text-3xl cursor-default font-[800]'>TV Shows</h1>
+        <div>
+          <UpcomingEpisodes />
+        </div>
+        <h1 className="text-3xl cursor-default font-[800]">TV Shows</h1>
         {shows.map((show, index) => (
           <div
             className="w-[50vw] break-words"
@@ -44,7 +46,7 @@ function ShowList() {
                 width="150"
                 height="150"
               />
-              <div className='p-3 self-center'>
+              <div className="p-3 self-center">
                 <h2 className="text-xl font-semibold">{show.name}</h2>
                 <div className="text-[70%]">
                   <p>{show.runtime}</p>
@@ -54,9 +56,12 @@ function ShowList() {
                 <p>{show.summary.slice(0, 100) + ' ...'}</p>
                 <p>{show.rating.average}</p>
                 <Link
-                  to={`/shows/${show.id}/${show.name
-                    .replace(/\s+/g, '-')
-                    .toLowerCase()}`}
+                  to={{
+                    pathname: `/shows/${show.id}/${show.name
+                      .replace(/\s+/g, '-')
+                      .toLowerCase()}`,
+                    state: { show: show },
+                  }}
                 >
                   View Details
                 </Link>

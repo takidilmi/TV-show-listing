@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 body {
+  word-break: break-word;
+  text-align: justify;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -18,12 +20,12 @@ code {
   opacity: 0.5;
   transform: translateX(-100%);
 }
-h2{
+h2 {
   font-size: 1.25rem;
   line-height: 1.75rem;
   font-weight: 700;
   cursor: default;
 }
-p{
+p {
   cursor: default;
 }

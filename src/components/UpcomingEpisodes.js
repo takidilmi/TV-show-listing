@@ -63,7 +63,13 @@ function UpcomingEpisodes() {
   const show = episode._embedded?.show;
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div
+      style={{
+        color: 'white',
+        textShadow: '1px 1px 1px rgba(0, 0, 0, 1)',
+      }}
+      className="flex flex-col justify-center items-center"
+    >
       <div
         className={`relative p-3 flex flex-col ${
           transitioning ? 'transitioning' : ''
@@ -99,7 +105,7 @@ function UpcomingEpisodes() {
           Next
         </button>
       </div>
-      <p>
+      <p className='text-black drop-shadow-none'>
         Airing on: {episode.airdate} at {episode.airtime}
       </p>
     </div>
