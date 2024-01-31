@@ -30,7 +30,11 @@ function UpcomingEpisodes() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((currentIndex + 1) % episodes.length);
+      setTransitioning(true);
+      setTimeout(() => {
+        setCurrentIndex((currentIndex + 1) % episodes.length);
+        setTransitioning(false);
+      }, 500);
     }, 5000);
     return () => clearInterval(timer);
   }, [currentIndex, episodes.length]);
@@ -59,11 +63,13 @@ function UpcomingEpisodes() {
   const show = episode._embedded?.show;
 
   return (
-    <div>
-      <button onClick={handlePrevious}>Previous</button>
+    <div className="flex flex-col justify-center items-center">
       <div
-        className={`w-screen ${transitioning ? 'transitioning' : ''}`}
+        className={`relative flex flex-col ${
+          transitioning ? 'transitioning' : ''
+        }`}
         style={{
+          width: 'calc(100vw - 100px)',
           height: '350px',
           backgroundImage: `url(${
             show?.image ? show.image.original : 'default-image.jpg'
@@ -75,13 +81,27 @@ function UpcomingEpisodes() {
         }}
         key={currentIndex}
       >
-        <h2>{show?.name}</h2>
-        <h3>{episode.name}</h3>
-        <p>
-          Airing on: {episode.airdate} at {episode.airtime}
-        </p>
+        <button
+          className="absolute left-5 top-[175px]"
+          onClick={handlePrevious}
+        >
+          Previous
+        </button>
+        <div className="w-full flex flex-col">
+          <h2 className="self-center">{show?.name}</h2>
+          <h2>{episode.name}</h2>
+        </div>
+
+        <button
+          className="absolute right-5 top-[175px]"
+          onClick={handleNext}
+        >
+          Next
+        </button>
       </div>
-      <button onClick={handleNext}>Next</button>
+      <p>
+        Airing on: {episode.airdate} at {episode.airtime}
+      </p>
     </div>
   );
 }

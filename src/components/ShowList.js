@@ -29,9 +29,7 @@ function ShowList() {
   return (
     <>
       <div className="flex flex-col justify-center items-center gap-2 w-screen">
-        <div>
-          <UpcomingEpisodes />
-        </div>
+        <div><UpcomingEpisodes /></div>
         {shows.map((show, index) => (
           <div
             className="w-[50vw] break-words"
