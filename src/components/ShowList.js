@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getShows } from '../api/tvmazeApi';
 
 function ShowList() {
@@ -41,13 +42,21 @@ function ShowList() {
               />
               <div>
                 <h2 className="text-xl font-semibold">{show.name}</h2>
-                <div className='text-[70%]'>
+                <div className="text-[70%]">
                   <p>{show.runtime}</p>
                   <p>{show.status}</p>
                   <p>{show.genres.join(', ')}</p>
                 </div>
-                <p>{show.summary.slice(0, 100)+' ...'}</p>
+                <p>{show.summary.slice(0, 100) + ' ...'}</p>
                 <p>{show.rating.average}</p>
+                <p>stars:</p>
+                <Link
+                  to={`/shows/${show.id}/${show.name
+                    .replace(/\s+/g, '-')
+                    .toLowerCase()}`}
+                >
+                  View Details
+                </Link>
               </div>
             </div>
           </div>
