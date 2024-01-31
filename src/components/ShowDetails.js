@@ -53,12 +53,13 @@ function ShowDetails() {
       <p>
         {show.schedule.days.join(', ')}, {show.schedule.time}
       </p>
-      <p>Stars:</p>
-      <ul>
+      <p>
+        Stars: {''}
         {cast.map((member, index) => (
-          <li key={index}>{member.person.name}</li>
+          <span key={index}>{member.person.name},{' '}</span>
         ))}
-      </ul>
+      </p>
+      <ul></ul>
     </div>
   );
 }

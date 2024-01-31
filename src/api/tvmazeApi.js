@@ -12,7 +12,6 @@ export const getShows = async () => {
   }
 };
 
-
 export const getShowDetails = async (id) => {
   try {
     const response = await axios.get(`${BASE_URL}/shows/${id}`);

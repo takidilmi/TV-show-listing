@@ -49,7 +49,6 @@ function ShowList() {
                 </div>
                 <p>{show.summary.slice(0, 100) + ' ...'}</p>
                 <p>{show.rating.average}</p>
-                <p>stars:</p>
                 <Link
                   to={`/shows/${show.id}/${show.name
                     .replace(/\s+/g, '-')
