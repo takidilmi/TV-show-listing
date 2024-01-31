@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const BASE_URL = 'https://api.tvmaze.com';
 
-export const getShows = async (query) => {
+export const getShows = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/search/shows?q=${query}`);
+    const response = await axios.get(`${BASE_URL}/shows`);
     return response.data;
   } catch (error) {
     console.error('Error fetching data: ', error);
