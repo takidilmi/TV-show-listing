@@ -65,7 +65,7 @@ function UpcomingEpisodes() {
   return (
     <div className="flex flex-col justify-center items-center">
       <div
-        className={`relative flex flex-col ${
+        className={`relative p-3 flex flex-col ${
           transitioning ? 'transitioning' : ''
         }`}
         style={{
@@ -87,7 +87,7 @@ function UpcomingEpisodes() {
         >
           Previous
         </button>
-        <div className="w-full flex flex-col">
+        <div className="w-full gap-6 flex flex-col">
           <h2 className="self-center">{show?.name}</h2>
           <h2>{episode.name}</h2>
         </div>

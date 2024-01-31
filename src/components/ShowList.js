@@ -30,6 +30,7 @@ function ShowList() {
     <>
       <div className="flex flex-col justify-center items-center gap-2 w-screen">
         <div><UpcomingEpisodes /></div>
+        <h1 className='text-3xl cursor-default font-[800]'>TV Shows</h1>
         {shows.map((show, index) => (
           <div
             className="w-[50vw] break-words"
@@ -43,7 +44,7 @@ function ShowList() {
                 width="150"
                 height="150"
               />
-              <div>
+              <div className='p-3 self-center'>
                 <h2 className="text-xl font-semibold">{show.name}</h2>
                 <div className="text-[70%]">
                   <p>{show.runtime}</p>
