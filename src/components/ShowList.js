@@ -18,10 +18,9 @@ function ShowList() {
         const data = await getShows();
         setShows(data);
       } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setIsLoading(false);
+        return <p>{error.message}</p>;
       }
+      setIsLoading(false);
     };
 
     fetchData();

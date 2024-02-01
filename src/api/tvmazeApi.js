@@ -8,6 +8,11 @@ export const getShows = async () => {
     return response.data;
   } catch (error) {
     console.error('Error fetching data: ', error);
+    if (error.response && error.response.status === 429) {
+      throw new Error(
+        'You have reached the limited rate of calls, at max 20 per 10 second'
+      );
+    }
     return null;
   }
 };
