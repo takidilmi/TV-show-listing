@@ -17,12 +17,12 @@ function ShowDetails() {
 
   useEffect(() => {
     // Retrieve the booking status from local storage
-    const storedBookingStatus = localStorage.getItem('isBooked');
+    const storedBookingStatus = localStorage.getItem(`isBooked-${id}`);
     // If a booking status was retrieved, update the isBooked state
     if (storedBookingStatus) {
       setIsBooked(JSON.parse(storedBookingStatus));
     }
-  }, []);
+  }, [id]);
 
   // If 'show' is null after mounting (i.e., navigated directly to the page), fetch the show data.
   useEffect(() => {
@@ -79,7 +79,7 @@ function ShowDetails() {
   const handleFormSubmit = () => {
     setIsBooked(true);
     // Store the booking status in local storage
-    localStorage.setItem('isBooked', true);
+    localStorage.setItem(`isBooked-${id}`, true);
     setIsSuccess(true);
     setIsBooking(false);
     // Hide the success message after 3 seconds
