@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getShows } from '../api/tvmazeApi';
 import UpcomingEpisodes from './UpcomingEpisodes';
+import Pagination from './Pagination';
+import Search from './Search';
 
 function ShowList() {
   const [shows, setShows] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const showsPerPage = 10;
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,6 +26,14 @@ function ShowList() {
 
     fetchData();
   }, []);
+  const totalPages = Math.ceil(shows.length / showsPerPage);
+  const filteredShows = shows.filter((show) =>
+    show.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  const currentShows = filteredShows.slice(
+    (currentPage - 1) * showsPerPage,
+    currentPage * showsPerPage
+  );
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -28,12 +41,16 @@ function ShowList() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center gap-2 w-screen">
+      <div className="flex flex-col justify-center p-5 items-center gap-2 w-screen">
         <div>
           <UpcomingEpisodes />
         </div>
         <h1 className="text-3xl cursor-default font-[800]">TV Shows</h1>
-        {shows.map((show, index) => (
+        <Search
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+        />
+        {currentShows.map((show, index) => (
           <div
             className="w-[50vw] break-words"
             key={index}
@@ -70,6 +87,11 @@ function ShowList() {
           </div>
         ))}
       </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </>
   );
 }
