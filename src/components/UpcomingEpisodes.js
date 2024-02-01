@@ -56,7 +56,11 @@ function UpcomingEpisodes() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500"></div>
+      </div>
+    );
   }
 
   const episode = episodes[currentIndex];
@@ -105,7 +109,7 @@ function UpcomingEpisodes() {
           Next
         </button>
       </div>
-      <p className='text-black drop-shadow-none'>
+      <p className="text-black drop-shadow-none">
         Airing on: {episode.airdate} at {episode.airtime}
       </p>
     </div>

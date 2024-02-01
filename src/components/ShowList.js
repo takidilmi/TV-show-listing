@@ -36,7 +36,11 @@ function ShowList() {
   );
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500"></div>
+      </div>
+    );
   }
 
   return (
@@ -52,27 +56,29 @@ function ShowList() {
         />
         {currentShows.map((show, index) => (
           <div
-            className="w-[50vw] break-words"
+            className="break-words lg:w-[1024px] md:w-[768px]"
             key={index}
           >
-            <div className="flex">
+            <div className="flex flex-wrap break-words">
               <img
                 src={show.image.medium}
                 alt={show.name}
                 loading="lazy"
                 width="150"
                 height="150"
+                style={{ objectFit: 'cover' }}
               />
               <div className="p-3 self-center">
                 <h2 className="text-xl font-semibold">{show.name}</h2>
                 <div className="text-[70%]">
-                  <p>{show.runtime}</p>
+                  <p>{show.runtime} min</p>
                   <p>{show.status}</p>
                   <p>{show.genres.join(', ')}</p>
                 </div>
-                <p>{show.summary.slice(0, 100) + ' ...'}</p>
+                <p className="">{show.summary.slice(0, 100) + ' ...'}</p>
                 <p>{show.rating.average}</p>
                 <Link
+                  className="text-blue-500 hover:text-blue-700"
                   to={{
                     pathname: `/shows/${show.id}/${show.name
                       .replace(/\s+/g, '-')
