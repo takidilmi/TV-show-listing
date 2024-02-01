@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { getShowDetails, getShowCast, getShowCrew } from '../api/tvmazeApi';
+import BookingForm from './BookingForm';
 
 function ShowDetails() {
   const { id } = useParams();
@@ -62,7 +63,7 @@ function ShowDetails() {
           backgroundImage: `url(${show.image.original})`,
           textShadow: '1px 1px 1px rgba(0, 0, 0, 1)',
         }}
-        className="flex flex-col gap-4"
+        className="flex flex-wrap flex-col gap-4"
       >
         <div
           style={{
@@ -98,14 +99,21 @@ function ShowDetails() {
               </p>
             </div>
           </div>
-          <div className="flex flex-col gap-2">
-            <img
-              className="rounded-lg mt-5 self-center"
-              src={show.image.medium}
-              alt={show.name}
-              width={300}
-              height={300}
-            />
+          <div className="flex flex-wrap flex-col gap-2">
+            <div className="flex justify-around items-center">
+              <div>
+                <BookingForm />
+              </div>
+              <button className="rounded-lg bg-red-600 p-2 text-center">Book a ticket</button>
+              <img
+                className="rounded-lg mt-5"
+                src={show.image.medium}
+                alt={show.name}
+                width={300}
+                height={300}
+              />
+              <button className="rounded-lg bg-red-600 p-2 text-center">Book a ticket</button>
+            </div>
             <p className="text-center">
               ( {show.premiered} / {show.ended} )
             </p>
