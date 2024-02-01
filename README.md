@@ -20,8 +20,8 @@ This is a React application that uses the TVmaze API to display information abou
 
 ## Running the Project Locally
 
-1. Clone the repository: `git clone https://github.com/yourusername/yourrepository.git`
-2. Navigate into the project directory: `cd yourrepository`
-3. Install the dependencies: `npm install`
-4. Start the application: `npm start`
+1. Clone the repository:
+2. Navigate into the project directory: `cd TV-show-listing`
+3. Install the dependencies: `npm/pnpm install`
+4. Start the application: `npm/pnpm start`
 5. Open your browser and navigate to `http://localhost:3000` to view the application.
