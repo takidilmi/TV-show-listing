@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ShowList from './components/ShowList';
 import ShowDetails from './components/ShowDetails';
+import NotFound from './components/404';
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
         <Route
           path="/shows/:id/:title"
           element={<ShowDetails />}
+        />
+        <Route
+          path="*"
+          element={<NotFound />}
         />
       </Routes>
     </Router>
