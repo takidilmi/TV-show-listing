@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function BookingForm() {
+function BookingForm({ onFormSubmit }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -18,24 +18,24 @@ function BookingForm() {
       bookingTime,
       comment,
     };
-    localStorage.setItem('userDetails', JSON.stringify(userDetails));
-    console.log('Successful');
+    localStorage.setItem('userDetails', JSON.stringify(userDetails));    
     setName('');
     setEmail('');
     setPhoneNumber('');
     setBookingDate('');
     setBookingTime('');
     setComment('');
+    onFormSubmit();
   };
 
   return (
     <>
       <form
-        className="flex text-black gap-2 justify-center p-2 flex-col"
+        className="flex bg-black rounded-md text-black gap-2 justify-center p-2 flex-col"
         onSubmit={handleSubmit}
       >
         <label className="flex flex-col">
-          Name:
+          <span className="text-white">Name:</span>
           <input
             placeholder="Enter your FullName"
             type="text"
@@ -45,7 +45,7 @@ function BookingForm() {
           />
         </label>
         <label className="flex flex-col">
-          Email:
+          <span className="text-white">Email:</span>
           <input
             placeholder="Enter your Email"
             type="email"
@@ -55,7 +55,7 @@ function BookingForm() {
           />
         </label>
         <label className="flex flex-col">
-          Phone Number:
+          <span className="text-white">Phone Number:</span>
           <input
             placeholder="Enter your PhoneNumber"
             type="tel"
@@ -65,7 +65,7 @@ function BookingForm() {
           />
         </label>
         <label className="flex flex-col">
-          Booking Date:
+          <span className="text-white">Booking Date:</span>
           <input
             type="date"
             value={bookingDate}
@@ -74,7 +74,7 @@ function BookingForm() {
           />
         </label>
         <label className="flex flex-col">
-          Booking Time:
+          <span className="text-white">Booking Time:</span>
           <input
             type="time"
             value={bookingTime}
@@ -83,7 +83,7 @@ function BookingForm() {
           />
         </label>
         <label className="flex flex-col">
-          Additional Comments:
+          <span className="text-white">Additional Comments:</span>
           <textarea
             placeholder="What are your Concerns?"
             value={comment}
@@ -91,7 +91,7 @@ function BookingForm() {
           />
         </label>
         <input
-          className='bg-black text-white rounded-sm'
+          className="bg-black cursor-pointer text-white rounded-sm"
           type="submit"
           value="Submit"
         />

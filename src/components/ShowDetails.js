@@ -10,6 +10,17 @@ function ShowDetails() {
   const [show, setShow] = useState(location.state ? location.state.show : null);
   const [cast, setCast] = useState([]);
   const [creator, setCreator] = useState('');
+  const [isBooking, setIsBooking] = useState(false);
+  const [isBooked, setIsBooked] = useState(false);
+
+  useEffect(() => {
+    // Retrieve the booking status from local storage
+    const storedBookingStatus = localStorage.getItem('isBooked');
+    // If a booking status was retrieved, update the isBooked state
+    if (storedBookingStatus) {
+      setIsBooked(JSON.parse(storedBookingStatus));
+    }
+  }, []);
 
   // If 'show' is null after mounting (i.e., navigated directly to the page), fetch the show data.
   useEffect(() => {
@@ -56,6 +67,15 @@ function ShowDetails() {
 
   let cleanSummary = stripHtmlTags(show.summary);
 
+  const handleBookingClick = () => {
+    setIsBooking((prevIsBooking) => !prevIsBooking);
+  };
+  const handleFormSubmit = () => {
+    setIsBooked(true);
+    // Store the booking status in local storage
+    localStorage.setItem('isBooked', true);
+  };
+
   return (
     <>
       <div
@@ -100,11 +120,33 @@ function ShowDetails() {
             </div>
           </div>
           <div className="flex flex-wrap flex-col gap-2">
-            <div className="flex justify-around items-center">
-              <div>
-                <BookingForm />
-              </div>
-              <button className="rounded-lg bg-red-600 p-2 text-center">Book a ticket</button>
+            <div className="flex relative justify-around items-center">
+              {!isBooked && (
+                <button
+                  onClick={handleBookingClick}
+                  className="rounded-lg bg-black bg-opacity-60  hover:bg-opacity-100 p-2 text-center"
+                >
+                  Book a ticket
+                </button>
+              )}
+              {isBooking && (
+                <div
+                  style={{
+                    animation: 'slide-down 0.5s forwards',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    position: 'absolute',
+                  }}
+                >
+                  <BookingForm onFormSubmit={handleFormSubmit} />
+                  <button
+                    onClick={handleBookingClick}
+                    className="self-center bg-red-600 px-2 rounded-sm"
+                  >
+                    Close
+                  </button>
+                </div>
+              )}
               <img
                 className="rounded-lg mt-5"
                 src={show.image.medium}
@@ -112,7 +154,17 @@ function ShowDetails() {
                 width={300}
                 height={300}
               />
-              <button className="rounded-lg bg-red-600 p-2 text-center">Book a ticket</button>
+              <button
+                disabled={isBooked}
+                onClick={handleBookingClick}
+                className={`rounded-lg bg-black ${
+                  isBooked
+                    ? 'bg-opacity-60'
+                    : 'bg-opacity-60 hover:bg-opacity-100'
+                } p-2 text-center`}
+              >
+                {isBooked ? 'Booked already' : 'Book a ticket'}
+              </button>
             </div>
             <p className="text-center">
               ( {show.premiered} / {show.ended} )
