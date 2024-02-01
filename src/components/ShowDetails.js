@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { getShowDetails, getShowCast, getShowCrew } from '../api/tvmazeApi';
 import BookingForm from './BookingForm';
+import RecommendedShows from './RecommendedShows';
 
 function ShowDetails() {
   const { id } = useParams();
@@ -12,6 +13,7 @@ function ShowDetails() {
   const [creator, setCreator] = useState('');
   const [isBooking, setIsBooking] = useState(false);
   const [isBooked, setIsBooked] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     // Retrieve the booking status from local storage
@@ -78,6 +80,12 @@ function ShowDetails() {
     setIsBooked(true);
     // Store the booking status in local storage
     localStorage.setItem('isBooked', true);
+    setIsSuccess(true);
+    setIsBooking(false);
+    // Hide the success message after 3 seconds
+    setTimeout(() => {
+      setIsSuccess(false);
+    }, 3000);
   };
 
   return (
@@ -86,6 +94,7 @@ function ShowDetails() {
         style={{
           backgroundImage: `url(${show.image.original})`,
           textShadow: '1px 1px 1px rgba(0, 0, 0, 1)',
+          backgroundSize: 'cover',
         }}
         className="flex flex-wrap flex-col gap-4"
       >
@@ -169,6 +178,11 @@ function ShowDetails() {
               >
                 {isBooked ? 'Booked already' : 'Book a ticket'}
               </button>
+              {isSuccess && (
+                <p className="text-center text-green-600 absolute" >
+                  Successful
+                </p>
+              )}
             </div>
             <p className="text-center">
               ( {show.premiered} / {show.ended} )
@@ -190,6 +204,7 @@ function ShowDetails() {
           </div>
         </div>
       </div>
+      <RecommendedShows genre={show.genres[0]} />
     </>
   );
 }
